@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+    mongodb:
+        image: mongo
+        container_name: mongodb
+        volumes:
+            - data:/data/db
+        restart: unless-stopped
+        ports:
+            - "27017:27017"
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=nees
+            - MONGO_INITDB_ROOT_PASSWORD=nees
+
+    client:
+        container_name: meroroomClient
+        image: client:meroroomV1
+        build: ./client
+        ports:
+            - "5173:5173"
+        volumes:
+            - ./client/src:/app/src
+        environment:
+            - WATCHPACK_POLLING=true
+        depends_on:
+            - server
+        stdin_open: true
+        tty: true
+
+    server:
+        container_name: meroroomServer
+        image: server:meroroom
+        build: ./server
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./server:/app/
+            - /app/node_modules
+        environment:
+            - PORT=8000
+            - MONGO_INIT_ROOT_USERNAME=nees
+            - MONGO_INIT_ROOT_PASSWORD=nees
+        depends_on:
+            - mongodb
+
+volumes:
+    data:
