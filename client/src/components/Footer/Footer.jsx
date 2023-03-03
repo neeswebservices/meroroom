@@ -13,7 +13,7 @@ const Footer = () => {
     return (
         <>
             <dialog open={open}>
-                Hello <button onClick={(e) => setOpen(false)}>Close</button>
+                Hello <button onClick={(e) => setOpen(false)}>x</button>
             </dialog>
 
             <footer>
