@@ -1,0 +1,13 @@
+footer {
+    margin-top: 100px;
+    background: #efefef;
+    display: flex;
+    align-items: center;
+    padding: 100px;
+    justify-content: space-evenly;
+    .socials {
+        .ico {
+            margin: 10px;
+        }
+    }
+}

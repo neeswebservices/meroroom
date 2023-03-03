@@ -15,14 +15,14 @@ services:
 
     client:
         container_name: meroroomClient
-        image: client:meroroomV1
+        image: client:meroroom
         build: ./client
         ports:
-            - "5173:5173"
-        volumes:
-            - ./client/src:/app/src
+            - "3000:3000"
         environment:
             - WATCHPACK_POLLING=true
+        volumes:
+            - ./client/src:/app/src
         depends_on:
             - server
         stdin_open: true
